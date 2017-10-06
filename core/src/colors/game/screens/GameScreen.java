@@ -14,11 +14,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public class GameScreen implements Screen {
 
     private final ColorsGame game;
-    private OrthographicCamera camera;
-
-    private GameMap map;
-
     public int playerRadius = 20;
+    private OrthographicCamera camera;
+    private GameMap map;
 
     public GameScreen(final ColorsGame game) {
         this.game = game;
@@ -91,7 +89,7 @@ public class GameScreen implements Screen {
         game.shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
         game.shapeRenderer.circle(map.player.x * map.tileSize + map.tileSize / 2, map.player.y * map.tileSize + map.tileSize / 2, playerRadius);
         game.shapeRenderer.set(ShapeRenderer.ShapeType.Line);
-        game.shapeRenderer.setColor(map.tiles[(int)map.player.x][(int)map.player.y].getMax() > 0.5 ? com.badlogic.gdx.graphics.Color.BLACK : com.badlogic.gdx.graphics.Color.WHITE);
+        game.shapeRenderer.setColor(map.tiles[(int) map.player.x][(int) map.player.y].getMax() > 0.5 ? com.badlogic.gdx.graphics.Color.BLACK : com.badlogic.gdx.graphics.Color.WHITE);
         game.shapeRenderer.circle(map.player.x * map.tileSize + map.tileSize / 2, map.player.y * map.tileSize + map.tileSize / 2, playerRadius);
     }
 
@@ -100,22 +98,19 @@ public class GameScreen implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
             if (map.player.x > 0) map.player.x--;
             isMoved = true;
-        }
-        else if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
             if (map.player.x < map.width - 1) map.player.x++;
             isMoved = true;
-        }
-        else if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
             if (map.player.y < map.height - 1) map.player.y++;
             isMoved = true;
-        }
-        else if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
             if (map.player.y > 0) map.player.y--;
             isMoved = true;
         }
 
         if (isMoved) {
-            map.tiles[(int)map.player.x][(int)map.player.y].applyPainter(map.player.painter);
+            map.tiles[(int) map.player.x][(int) map.player.y].applyPainter(map.player.painter);
 
             Pickup toRemove = null;
             for (Pickup pickup : map.pickups) {

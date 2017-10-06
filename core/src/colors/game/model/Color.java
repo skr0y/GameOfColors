@@ -11,6 +11,9 @@ public class Color {
     public float green;
     public float blue;
 
+    public static Color[] colors = new Color[]{RED, GREEN, BLUE};
+    private static Random random = new Random();
+
     public Color() {
         this(0, 0, 0);
     }
@@ -25,10 +28,6 @@ public class Color {
         this.blue = blue;
     }
 
-    public static Color[] colors = new Color[] {RED, GREEN, BLUE};
-
-    private static Random random = new Random();
-
     public static void setColors(Color... newColors) {
         colors = newColors;
     }
@@ -37,20 +36,20 @@ public class Color {
         return new Color(colors[random.nextInt(colors.length)]);
     }
 
-    public float getMax() {
-        return Math.max(Math.max(red, green), blue);
-    }
-
-    public com.badlogic.gdx.graphics.Color gdx() {
-        return new com.badlogic.gdx.graphics.Color(red, green, blue, 1);
-    }
-
     public static Color add(Color color1, Color color2) {
         Color newColor = new Color();
         newColor.red = Math.max(color1.red, color2.red);
         newColor.green = Math.max(color1.green, color2.green);
         newColor.blue = Math.max(color1.blue, color2.blue);
         return newColor;
+    }
+
+    public float getMax() {
+        return Math.max(Math.max(red, green), blue);
+    }
+
+    public com.badlogic.gdx.graphics.Color gdx() {
+        return new com.badlogic.gdx.graphics.Color(red, green, blue, 1);
     }
 
     public void applyPainter(Painter painter) {
