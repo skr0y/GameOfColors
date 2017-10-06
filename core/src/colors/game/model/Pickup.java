@@ -11,4 +11,8 @@ public class Pickup {
         this.y = y;
         this.painter = painter;
     }
+
+    public String toString() {
+        return String.format("x:%d y:%d painter:[%s]", x, y, painter.toString());
+    }
 }

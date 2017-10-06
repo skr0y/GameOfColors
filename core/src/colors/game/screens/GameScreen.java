@@ -94,23 +94,22 @@ public class GameScreen implements Screen {
     }
 
     private void update(float delta) {
-        boolean isMoved = false;
+        boolean isMoved = true;
         if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
             if (map.player.x > 0) map.player.x--;
-            isMoved = true;
         } else if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
             if (map.player.x < map.width - 1) map.player.x++;
-            isMoved = true;
         } else if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
             if (map.player.y < map.height - 1) map.player.y++;
-            isMoved = true;
         } else if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
             if (map.player.y > 0) map.player.y--;
-            isMoved = true;
+        } else {
+            isMoved = false;
         }
 
         if (isMoved) {
-            map.tiles[(int) map.player.x][(int) map.player.y].applyPainter(map.player.painter);
+            //Gdx.app.log("moved", String.format("player:[%s]", map.player));
+            map.tiles[map.player.x][map.player.y].applyPainter(map.player.painter);
 
             Pickup toRemove = null;
             for (Pickup pickup : map.pickups) {
@@ -119,6 +118,7 @@ public class GameScreen implements Screen {
                     break;
                 }
             }
+
             if (toRemove != null) {
                 map.player.painter = toRemove.painter;
                 map.pickups.remove(toRemove);

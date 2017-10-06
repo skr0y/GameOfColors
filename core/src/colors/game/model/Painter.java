@@ -10,4 +10,7 @@ public class Painter {
         this.color = color;
     }
 
+    public String toString() {
+        return String.format("power:%.1f color:[%s]", power, color.toString());
+    }
 }

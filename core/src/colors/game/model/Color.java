@@ -53,8 +53,12 @@ public class Color {
     }
 
     public void applyPainter(Painter painter) {
-        this.red = Math.max(Math.min(this.red, this.red + painter.power * painter.color.red), this.red + painter.power * painter.color.red);
-        this.green = Math.max(Math.min(this.green, this.green + painter.power * painter.color.green), this.green + painter.power * painter.color.green);
-        this.blue = Math.max(Math.min(this.blue, this.blue + painter.power * painter.color.blue), this.blue + painter.power * painter.color.blue);
+        this.red = Math.min(Math.max(0, this.red + painter.power * painter.color.red), 1);
+        this.green = Math.min(Math.max(0, this.green + painter.power * painter.color.green), 1);
+        this.blue = Math.min(Math.max(0, this.blue + painter.power * painter.color.blue), 1);
+    }
+
+    public String toString() {
+        return String.format("r:%.1f g:%.1f b:%.1f", red, green, blue);
     }
 }
